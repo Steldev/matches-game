@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
+import Setup from "./Setup";
+import Game from "./Game";
 
-class App extends React.Component {
-    render() {
-        return <Container>
-            <h1>Hello Stormotion!</h1>
-        </Container>;
-    }
-}
+const App = () => {
+    const [isStarted, setIsStarted] = useState(false);
+    const [firstTurn, setFirstTurn] = useState(true);
+
+    return <Container className="d-flex justify-content-center">
+        {!isStarted
+            ?
+            <Setup
+                confirmFirstTurn={setFirstTurn}
+                setIsStarted={setIsStarted}
+            />
+            :
+            <Game
+                firstTurn={firstTurn}
+                setIsStarted={setIsStarted}
+            />
+        }
+    </Container>
+};
 
 export default App;
